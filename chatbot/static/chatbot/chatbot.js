@@ -6,7 +6,7 @@ var is_first = true;
 var practice = false;
 
 var dialog_id = "0"
-var chat_input_wrong = "잘 못 말하고 있는 것 같아요"
+var chat_input_wrong = "잘못 말하고 있는 것 같아요"
 var chat_output_wrong = "앗 실수해서 미안해요\n 어떻게 말해야 했나요?"
 var end_wrong = "고쳐줘서 고마워요!"
 var end_wrong_additive
