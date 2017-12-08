@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'chatbot/chatbot.css' %}" />
+<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<script type="text/javascript" src="{% static 'chatbot/josa.js' %}" /></script>
+<script type="text/javascript" src="{% static 'chatbot/chatbot.js' %}" /></script>
+
+
+</head>
+
+<body>
+  <div id="container">
+  <div id="chat_display">
+    <div id="chat_display_container">
+
+    </div>
+  </div>
+  <div id="chat_input">
+    <div id="chat_input_container" class="large_container">
+    <textarea id="chat_input_text"></textarea>
+    <div id='button_box' style="float: right">
+    <button id="return" class='btn btn-large btn-success'>
+      Send
+    </button>
+    <button id="wrong" class='btn btn-large btn-danger'>
+      잘 못 말하고 있어요!
+    </button>
+  </div>
+  </div>
+  </div>
+</div>
+</body>
+
+</html>
