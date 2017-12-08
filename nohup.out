@@ -1,0 +1,70 @@
+Unhandled exception in thread started by <function check_errors.<locals>.wrapper at 0x7f40cad89e18>
+Traceback (most recent call last):
+  File "/home/john/venv/lib/python3.5/site-packages/django/utils/autoreload.py", line 228, in wrapper
+    fn(*args, **kwargs)
+  File "/home/john/venv/lib/python3.5/site-packages/django/core/management/commands/runserver.py", line 125, in inner_run
+    self.check(display_num_errors=True)
+  File "/home/john/venv/lib/python3.5/site-packages/django/core/management/base.py", line 359, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/home/john/venv/lib/python3.5/site-packages/django/core/management/base.py", line 346, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/home/john/venv/lib/python3.5/site-packages/django/core/checks/registry.py", line 81, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/home/john/venv/lib/python3.5/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/home/john/venv/lib/python3.5/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/home/john/venv/lib/python3.5/site-packages/django/urls/resolvers.py", line 254, in check
+    for pattern in self.url_patterns:
+  File "/home/john/venv/lib/python3.5/site-packages/django/utils/functional.py", line 35, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/john/venv/lib/python3.5/site-packages/django/urls/resolvers.py", line 405, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/home/john/venv/lib/python3.5/site-packages/django/utils/functional.py", line 35, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/john/venv/lib/python3.5/site-packages/django/urls/resolvers.py", line 398, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/home/john/venv/lib/python3.5/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 665, in exec_module
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "/home/john/IIRTech/IIRTech_chatbot/IIRtech_chat/urls.py", line 21, in <module>
+    url(r'^chatbot/', include('chatbot.urls')),
+  File "/home/john/venv/lib/python3.5/site-packages/django/conf/urls/__init__.py", line 50, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/home/john/venv/lib/python3.5/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 665, in exec_module
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "/home/john/IIRTech/IIRTech_chatbot/chatbot/urls.py", line 2, in <module>
+    from . import views
+  File "/home/john/IIRTech/IIRTech_chatbot/chatbot/views.py", line 4, in <module>
+    from .luis_cognition import cognizer
+  File "/home/john/IIRTech/IIRTech_chatbot/chatbot/luis_cognition.py", line 1, in <module>
+    import luis
+ImportError: No module named 'luis'
+Performing system checks...
+
+Not Found: /
+[08/Dec/2017 06:33:45] "GET / HTTP/1.1" 404 2031
+[08/Dec/2017 06:33:48] "GET /chatbot/ HTTP/1.1" 200 1841
+[08/Dec/2017 06:33:48] "GET /chatbot/initialize?dialog_id=0 HTTP/1.1" 200 524
+[08/Dec/2017 06:33:48] "GET /static/chatbot/chatbot.css HTTP/1.1" 304 0
+[08/Dec/2017 06:33:48] "GET /static/chatbot/chatbot.js HTTP/1.1" 304 0
+[08/Dec/2017 06:33:48] "GET /static/chatbot/josa.js HTTP/1.1" 304 0
+[08/Dec/2017 06:35:24] "GET /chatbot/ HTTP/1.1" 200 1841
+[08/Dec/2017 06:35:33] "GET /chatbot/ HTTP/1.1" 200 1841
+[08/Dec/2017 06:35:33] "GET /static/chatbot/chatbot.css HTTP/1.1" 200 2526
+[08/Dec/2017 06:35:33] "GET /static/chatbot/josa.js HTTP/1.1" 200 1443
+[08/Dec/2017 06:35:33] "GET /static/chatbot/chatbot.js HTTP/1.1" 200 4525
+Not Found: /favicon.ico
+[08/Dec/2017 06:35:38] "GET /favicon.ico HTTP/1.1" 404 2082
+[08/Dec/2017 06:35:38] "GET /chatbot/initialize?dialog_id=0 HTTP/1.1" 200 524

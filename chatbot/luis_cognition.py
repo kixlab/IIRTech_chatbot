@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import luis
 from django.db.models import Count
 from .models import Node, Intent, Entity, chatbot_utterance
