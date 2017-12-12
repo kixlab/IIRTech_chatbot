@@ -41,5 +41,10 @@ class cognizer:
             for entity in entities:
                 if entity.type in return_utt:
                     return_utt = return_utt.replace("{"+entity.type+"}", entity.entity.replace(" ",""))
-        dic={'next_node_id' : return_node.node_id, 'next_node_text': return_utt, 'next_node_nn': return_node.next_nodes, 'filtered' : filtered_utterances, 'entity_in_list':entity_in_list, 'entity_out_list':entity_ex_list, 'candi' : candidate_utterances}
+        dic={'quiz':return_node.quiz,'next_node_id' : return_node.node_id, 'next_node_text': return_utt, 'next_node_nn': return_node.next_nodes, 'filtered' : filtered_utterances, 'entity_in_list':entity_in_list, 'entity_out_list':entity_ex_list, 'candi' : candidate_utterances}
+        return dic
+
+    def quiz(self, user_input, node):
+        return_node = node.next_nodes.all()[0]
+        dic={'quiz':return_node.quiz, 'next_node_id' : return_node.node_id, 'next_node_text': return_node.chatbot_utterance.all()[0].chatbot_template, 'next_node_nn': return_node.next_nodes}#, 'filtered' : filtered_utterances, 'entity_in_list':entity_in_list, 'entity_out_list':entity_ex_list, 'candi' : candidate_utterances}
         return dic

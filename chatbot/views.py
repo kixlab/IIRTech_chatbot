@@ -27,31 +27,49 @@ def retrieve_text(request):
     dialog = Dialog.objects.get(dialog_id = dialog_id)
     user_input = request.GET.get("input")
     cur_node_id= request.GET.get("cur_node")
+    practice = request.GET.get('practice')
+
     cur_node = Node.objects.get(node_id = cur_node_id)
-
-    next_node = cognizer.cog(user_input, cur_node)
+    print(practice)
+    if practice == 'false':
+        next_node = cognizer.cog(user_input, cur_node)
     #see whether the chat session ends or not
-    if next_node['next_node_nn'].all().count()==0 :
-        end=True
-    else:
-        end=False
+        if next_node['next_node_nn'].all().count()==0 :
+            end=True
+        else:
+            end=False
     #see whether the chat is in ~~ state
-    if dialog.practice_node.node_id == next_node['next_node_id']:
-        practice = True
-    else:
-        practice = False
-    #
-    #next_node = Node.objects.get(node_id = next_node_id)
+        if dialog.practice_node.node_id == next_node['next_node_id']:
+            practice = True
+        else:
+            practice = False
+        print('here')
 
-    print(next_node['filtered'])
-    print(next_node['entity_in_list'])
-    print(next_node['entity_out_list'])
-    print(next_node['candi'])
+    else:
+        next_node = cognizer.quiz(user_input, cur_node)
+        if next_node['next_node_nn'].all().count()==0 :
+            end=True
+        else:
+            end=False
+    if practice==False:
+        quiz=None
+        print('no quiz')
+    else:
+        if next_node['quiz']!=None:
+            quiz={
+                'quiz_h' : next_node['quiz'].hint,
+                'quiz_a' : next_node['quiz'].answer,
+                'quiz_f' : next_node['quiz'].feedback,
+                }
+        else:
+            quiz = None
+        print(next_node['quiz'])
     data={
         'next_node_id' : next_node['next_node_id'],
         'next_node_text' : next_node['next_node_text'],
         'end':end,
         'practice': practice,
+        'quiz' : quiz,
     }
     return JsonResponse(data)
 
@@ -66,8 +84,15 @@ def wrong_and_return(request):
     if CN in dialog.convergence_node.all():
         additive_utt = dialog.end_utterance
         next_node_id = dialog.practice_node.node_id
+        q = dialog.practice_node.quiz
+        quiz={
+            'quiz_h': q.hint,
+            'quiz_a': q.answer,
+            'quiz_f': q.feedback,
+        }
         practice= True
     else:
+        quiz=None
         additive_utt = dialog.back_up_utterance
         next_node_id = dialog.convergence_node.all()[0].node_id
         practice = False
@@ -75,6 +100,7 @@ def wrong_and_return(request):
         'next_node_id' : next_node_id,
         'additive_utt' : additive_utt,
         'practice' : practice,
+        'quiz' : quiz
     }
     return JsonResponse(data)
 

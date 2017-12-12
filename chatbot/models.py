@@ -16,10 +16,18 @@ class chatbot_utterance(models.Model):
     def __str__(self):
         return self.chatbot_template
 
+class Quiz(models.Model):
+    hint = models.TextField(default="")
+    answer = models.TextField(default="")
+    feedback = models.TextField(default="")
+    def __str__(self):
+        return self.answer
+
 class Node(models.Model):
     node_id = models.TextField(default = "")
     chatbot_utterance = models.ManyToManyField(chatbot_utterance)
     allowed_intents = models.ManyToManyField(Intent, blank=True)
+    quiz = models.ForeignKey(Quiz, blank=True, null = True)
     next_nodes = models.ManyToManyField('self', blank=True, symmetrical = False)
     def __str__(self):
         return self.node_id

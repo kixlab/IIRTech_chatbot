@@ -157,3 +157,9 @@ body{
 #chat_input_container{
   height:100%;
 }
+
+.quiz_input{
+  width: auto !important;
+  display: inline !important;
+  margin-right: 10px !important;
+}

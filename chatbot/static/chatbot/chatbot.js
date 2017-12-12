@@ -11,6 +11,10 @@ var chat_output_wrong = "앗 실수해서 미안해요\n 어떻게 말해야 했
 var end_wrong = "고쳐줘서 고마워요!"
 var end_wrong_additive
 
+var quiz_h
+var quiz_a
+var quiz_f
+
 $(document).ready(function(){
   initialize();
 
@@ -26,8 +30,8 @@ initialize = function(){
     success: function(data){
       cur_node = data.first_node
       cur_output = data.first_text
-      chat_output()
-      normal_function_buttons();
+      chat_output(normal_function_buttons)
+      //normal_function_buttons();
 
     },
     error: function(data){
@@ -49,7 +53,8 @@ retrieve_text = function(){
       'dialog_id': dialog_id,
       'input' : cur_input,
       'cur_node' : cur_node,
-      'is_first' : is_first
+      'is_first' : is_first,
+      'practice' : practice,
     },
     dataType: 'json',
     success: function(data){
@@ -62,14 +67,8 @@ retrieve_text = function(){
       }
 
       //append output
-      chat_output();
-      console.log(practice)
-      if(!data.end){
-        normal_function_buttons();
-      }
-      if(data.practice){
-        practice = data.practice
-      }
+      chat_output(retrieve_text_afteroutput,data);
+
 
 
     },
@@ -78,20 +77,70 @@ retrieve_text = function(){
     }
   })
 }
+retrieve_text_afteroutput=function(data){
+  console.log(practice)
+  if(!data.end && !data.practice){
+    normal_function_buttons();
+  }else if(!data.end&&data.practice){
+    set_quiz(data.quiz);
+    //alert('practice begins')
+  }
+  if(data.practice){
+    practice = data.practice
+  }
+}
 // append chat input in the chat interface
 chat_input = function(input = cur_input){
-  $("#chat_display_container").append("<div class='user_input'>"+input+"</div>")
-  scroll_adjust();
-}
-//append chat output in the chat interface
-chat_output = function(output = cur_output){
-  output = josa_change(output)
-  var output_split = output.split("/n")
-  for(var i=0; i<output_split.length; i++){
-      $("#chat_display_container").append("<div class='chatbot_output'>"+output_split[i]+"</div>")
+  if(!practice){
+    $("#chat_display_container").append("<div class='user_input'>"+input+"</div>")
+  }else{
+    var quiz_input = ''
+    for(var j=0; j<quiz_h.length; j++){
+      quiz_input = quiz_input + " "+ $("#quiz_"+j.toString()).val()
+      $("#quiz_"+j.toString()).val('')
+    }
+    $("#chat_display_container").append("<div class='user_input'>"+quiz_input+"</div>")
   }
   scroll_adjust();
 }
+//append chat output in the chat interface
+chat_output = function(function_to_call=null, param=null,output = cur_output){
+  console.log(param)
+  output = josa_change(output)
+  var output_split = output.split("/n")
+  chat_render(output_split, function_to_call, param)
+  //for(var i=0; i<output_split.length; i++){
+  //    $("#chat_display_container").append("<div class='chatbot_output'>"+output_split[i]+"</div>")
+  //}
+
+}
+chat_render=function(output_split, function_to_call, param){
+  //console.log(param)
+  if(output_split.length!=0){
+    $("<div class='chatbot_output' style='opacity:0'>chatbot is typing</div>").appendTo("#chat_display_container")
+    .animate({
+      opacity: 1}
+      ,{
+        duration : 1000,
+        start : function(){
+        scroll_adjust();
+      },
+      done : function(){
+        console.log('done')
+        $(this).text(output_split.shift())
+        chat_render(output_split, function_to_call, param)
+      },
+    })
+  }else if(function_to_call!=null){
+    if(param==null || param==undefined){
+      function_to_call()
+    }else{
+      function_to_call(param)
+    }
+  }
+    return;
+  }
+
 //adjust scroll bar when chat is added
 scroll_adjust = function(){
   $("#chat_display_container").scrollTop(function(){
@@ -101,7 +150,12 @@ scroll_adjust = function(){
 //when chatbot says in wrong way
 wrong_output = function(){
   chat_input(chat_input_wrong)
-  chat_output(chat_output_wrong)
+  chat_output(wrong_output_after_output ,null,chat_output_wrong)
+
+}
+
+wrong_output_after_output=function(){
+  $("#chat_input_text").replaceWith("<textarea id='chat_input_text'></textarea>")
   $("#wrong").off("click").addClass("disabled")
   $("#chat_input_text").off("keydown").on("keydown", function(key){
     if(key.keyCode==13){
@@ -128,11 +182,21 @@ wrong_and_return = function(){
       cur_node = data.next_node_id;
       console.log(data.additive_utt)
       if(data.additive_utt!=undefined){
-        chat_output(end_wrong+"/n"+data.additive_utt)
-    }else{
-      chat_output(end_wrong)
-    }
-    normal_function_buttons();
+        if(data.quiz==undefined){
+          chat_output(normal_function_buttons,null,end_wrong+"/n"+data.additive_utt)
+        }else{
+          practice = true;
+          chat_output(set_quiz,data.quiz,end_wrong+"/n"+data.additive_utt)
+        }
+      }else{
+        if(data.quiz==undefined){
+          chat_output(normal_function_buttons,null,end_wrong)
+        }else{
+          practice = true
+          chat_output(set_quiz,data.quiz,end_wrong)
+        }
+      }
+      //normal_function_buttons();
     },
     error: function(data){
 
@@ -182,4 +246,53 @@ josa_change = function(output){
     i++
   }
   return output
+}
+set_quiz=function(quiz){
+  $('#return').off('click')
+  //$('#wrong').off('click')
+  if(!practice){
+    $("#wrong").off("click").removeClass("disabled").on('click', function(){
+      practice = false;
+      wrong_output();
+    })
+  }else{
+    $("#wrong").addClass("disabled")
+  }
+  $('#chat_input_text').off('keydown')
+  $("#chat_input_text").replaceWith("<div id='chat_input_text'></div>")
+//  $("#wrong").off('click').addClass("disabled")
+  quiz_h = quiz['quiz_h'].split('/')
+  quiz_a = quiz['quiz_a'].split('/')
+  quiz_f = quiz['quiz_f'].split('/')
+  for(var j=0; j<quiz_h.length; j++){
+    $("#chat_input_text").append("<input id='quiz_"+j.toString()+"' class='form-control quiz_input' type='text' placeholder='"+quiz_h[j]+"'></input>")
+  }
+  $("#return").on("click", function(){
+    gen_quiz(quiz_a);
+  })
+  $('#chat_input_text').on('keydown', function(key){
+    if(key.keyCode == 13){
+      gen_quiz(quiz_a);
+    }
+  })
+}
+
+gen_quiz = function(quiz_a){
+  var feedback = ''
+  for(var j=0; j<quiz_h.length; j++){
+    if(quiz_a[j]!=$("#quiz_"+j.toString()).val().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ")){
+      if(feedback!=''){
+        feedback=feedback+"/n또, "+quiz_f[j]
+      }else{
+        feedback=quiz_f[j]
+      }
+    }
+  }
+  console.log(feedback)
+  if(feedback.length==0){
+    retrieve_text();
+  }else{
+    chat_input();
+    chat_output(null,null, feedback);
+  }
 }
