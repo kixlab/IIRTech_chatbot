@@ -159,6 +159,7 @@ body{
 }
 
 .quiz_input{
+  border: solid 2px black !important;
   width: auto !important;
   display: inline !important;
   margin-right: 10px !important;
