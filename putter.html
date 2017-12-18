@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'time_annotation/putter.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'time_annotation/jquery-ui.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.js"></script>
+    <script type="text/javascript" src="{% static 'time_annotation/jsplumb.js' %}" /></script>
+    <script type="text/javascript" src="{% static 'time_annotation/putter.js' %}" /></script>
+    <script type="text/javascript" src="{% static 'time_annotation/jquery-ui.js' %}" /></script>
+  </head>
+  <body class="" style="height : 100%; width: 100%;">
+
+    <div id="tutorial" style="position: absolute"><p id="tutorial_content"></p>
+      <div class="btn-group" style="float: right">
+        <button id="tuto_p" class='btn btn-secondary'>prev</button>
+        <button id="tuto_n" class='btn btn-secondary'>next</button>
+      </div>
+    </div>
+    <header class="navbar navbar-expand navbar-dark d-flex flex-md-row bd-navbar d-flex aligh-items-start" style="background-color: #0e2447; position: sticky; top: 0; z-index:5;">
+      <div id="Left_Title" style="font-size : 20pt">When does the event in the dark blue bordered box happen in chronological sequence?</div>
+      <div class="btn-group navbar-nav align-self-center ml-auto">
+        <button id="tutorial_button" class="btn btn-secondary btn-default col-4">Tutorial</button>
+        <button id="switch" class="btn btn-secondary btn-info col-4">Switch</button>
+        <button id="submit" class="btn btn-secondary btn-success col-4">Submit</button>
+      </div>
+    </header>
+    <div id="combined_panes" class="flex row" style="width: 100%; overflow: scroll; margin: 0;">
+      <div id="summary_pane" class="col-10" style="padding: 10px;overflow-y: scroll;" data-toggle="popover" data-placement="top" data-content="This is the events aligned in the original movie sequence.">
+        <div id="original_title" >Original Movie Sequence</div>
+      </div>
+      <div id="sequential_pane" class="col-10 ml-auto" style="padding: 10px; float: right;" data-toggle="popover" data-placement="left" data-content="This is the events aligned in the chronological sequence.">
+        <div id="chronological_title">Chronological Movie Sequence</div>
+      </div>
+    </div>
+  </body>
+</html>
