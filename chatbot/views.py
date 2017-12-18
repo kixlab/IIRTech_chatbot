@@ -3,8 +3,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from .models import Dialog, Node
 from .luis_cognition import cognizer
+from .papago_translate import translator
+import json
 # Create your views here.
 
+translator = translator()
 cognizer = cognizer()
 
 def index(request):
@@ -70,6 +73,14 @@ def retrieve_text(request):
         'end':end,
         'practice': practice,
         'quiz' : quiz,
+    }
+    return JsonResponse(data)
+
+def translate(request):
+    sentence = request.GET.get("sentence")
+    translated = translator.translate(sentence)
+    data = {
+        'translated': translated
     }
     return JsonResponse(data)
 

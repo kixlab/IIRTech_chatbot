@@ -164,3 +164,6 @@ body{
   display: inline !important;
   margin-right: 10px !important;
 }
+.trans_button{
+  float: right;
+}

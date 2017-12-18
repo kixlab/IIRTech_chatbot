@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^initialize', views.initialize, name='initialize'),
     url(r'^retrieve_text', views.retrieve_text, name='retrieve_text'),
     url(r'^wrong_and_return', views.wrong_and_return, name='wrong_and_return'),
+    url(r'^translate', views.translate, name='translate'),
 ]

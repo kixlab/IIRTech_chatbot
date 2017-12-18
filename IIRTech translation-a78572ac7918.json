@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "iirtech-translation",
+  "private_key_id": "a78572ac7918d8a53a3bfcea3cb16f9b9ef28561",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCwd3k8w7Lr3U6x\nDKHkX3mpCyocqxzNWeCqmelRXZjX99w5reUNMd0tFdtiD9ztEJrcdCcefoII+43H\nBJANBmqLh9mmICkQpehGdOu450R9bYwi9sJQKmTzqwnOwynddyw3RF0NDIEZF6aB\n+67uaI1gF9PUEjsV9Ff5DvIJ84SGtMQECuqQ1L59wO502Mw1JJNIuzWJBn8xqMcl\nJ97jJRFjAKwBzj+zJS4RgJd8ikze8RCFITUk9NXaleiQcIxXc713uWUGrrfJ2Xrp\nhPyjmlQyXyMrBajNlk5G7L2+664QexGudy9ZlRDgV8WUT60ticTzEhOtQDqjWFjG\nX+pdv0flAgMBAAECggEAKwSg/zVk0VdUltgRwiqdLZ6dYDo9bfj2Shh1loJ231Ua\nsEvqPc51UMeWgMAFtxvYaJv/KlGkMPzjycucszQodoXCQtttr1OGfWCE00E7gskZ\nA6/8XA8Np5H/NNKCSu0BkCJ//Y2aDgwkKOU6Nn+x0SZV2wmrsjUr2fjw+4iL+stA\nKcZ/rr1lQqVAQc3yvbIC2pmHzgM7k3eJkYDh6+ZhyDPTKMyuuWdb/Uiww4zSk1XQ\ntKQbbcDIb0LC35qrDhCxOVhZpcC7642YG2kzHRYD7i2o5EdQC8yikK1xAIt1sY/i\nElEPT9/OA+ndnLmMygjzAgdi3IxwTJYlOgJo/9/5oQKBgQDU/wnUgJ8D4h2KbRRg\nW2ViavZ6ig941LqqEjtOcx7O2bcS2YgmDfUZmCUVuQnQFs2SPlwQ5MBbJuPJ8RwX\nRwrz5tkyP1AKIehXWX5WSRi9oEGp0sbUKP4UDhecyzR6EB9qMNV3rhF207DYqjF2\nBc89vbXhZOhnmb60vP0GIw5xxQKBgQDUGFzFXRxb+Y62ryPzSxdPE81y7J36sMPH\nNbZmqLhB2I0rNUeYEUp7GqZltMhdNmBDSBVBYmBXZp0+E0HgCgYdxCy7aXXYkS8W\nm3dPA+xyT1GL0jUK/F66bmp80AX0yo2M2Rbgl36WjHnHLE06oIISWOokEAGy7vYl\nI0hU+uV/oQKBgBlKp3oqQ7eMVAGp7i966tEC7n2igy/P4tJrE8u+87uQMqL0XaxX\nH/GIFW8856Nj8ckZyojfANBSD95c2P8SmoRXtxa2WeS6HgKxR8UrLNrneqSVuLJc\no77x5W/i2TpdS72qSs7JRp2biXZQz0q6ad9k9YHsH4Sdxv1jK5Bc/UwZAoGAbeQB\njTDlFLKEwxqToebyOMKl3DnE0LLtfTXTP/WDInq1CgIdCilLUeVI+cFlXwZhcfrT\nKIF0MVS1fAg2RYJsENgn5SKLMJ5oq2n5szLxO3jlY3CSkxKXcjjra6fMrjyUgrmo\nJM3ZhN9b6VqG2S14t1DiX7T7bF5rompZe85TQoECgYBlZy3Fn87aPDye7lDabkCL\ny+CaRvYzMfRTkn3/T0QdZkSDX3OG/eJM0DKqLyaJFNQyVQLeKB6acMxnS85I3BRp\nAzQ18CyW6cHKyU7YQpkcSswRaEdVM5EHcHy9zwEfRIlDtEqXa3zsTWICl2/hYjQZ\ngkxDdKZRBrRKh2CkI+BUVw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "iirtech-chatbot@iirtech-translation.iam.gserviceaccount.com",
+  "client_id": "103838330235027020417",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/iirtech-chatbot%40iirtech-translation.iam.gserviceaccount.com"
+}

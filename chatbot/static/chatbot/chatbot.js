@@ -15,6 +15,8 @@ var quiz_h
 var quiz_a
 var quiz_f
 
+var id_button=0
+
 $(document).ready(function(){
   initialize();
 
@@ -109,9 +111,8 @@ chat_output = function(function_to_call=null, param=null,output = cur_output){
   output = josa_change(output)
   var output_split = output.split("/n")
   chat_render(output_split, function_to_call, param)
-  //for(var i=0; i<output_split.length; i++){
-  //    $("#chat_display_container").append("<div class='chatbot_output'>"+output_split[i]+"</div>")
-  //}
+
+  //chat_render(output_split, function_to_call, param)
 
 }
 chat_render=function(output_split, function_to_call, param){
@@ -127,7 +128,33 @@ chat_render=function(output_split, function_to_call, param){
       },
       done : function(){
         console.log('done')
-        $(this).text(output_split.shift())
+        var t = output_split.shift()
+        $(this).text(t).attr("val", t)
+        $(this).append("<button id='trans_"+id_button.toString()+"' class='trans_button btn btn-sm btn-secondary' data-toggle='tooltip'>Translate it!</button>")
+        $('#trans_'+id_button.toString()).on("click", function(){
+          $(this).text("translating...")
+          var but_id = $(this).attr('id')
+          $(this).off('click')
+          $.ajax({
+            url: '/chatbot/translate',
+            data:{
+              'sentence': $(this).parent().attr("val")
+            },
+            dataType: 'json',
+            success: function(data){
+
+              translated_sentence = data.translated//['message']['result']['translatedText']
+              console.log(translated_sentence)
+              translated_sentence = translated_sentence.replace(/&#39;/g,"'").replace(/&quot;/g,"'");
+              $("#"+but_id).text("translated!").attr('title',translated_sentence)
+              .tooltip('toggle')
+            },
+            error : function(data){
+
+            }
+          })
+        })
+        id_button++;
         chat_render(output_split, function_to_call, param)
       },
     })
